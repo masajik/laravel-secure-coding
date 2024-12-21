@@ -4,29 +4,22 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
-// class RoleMiddleware
-// {
-//     public function handle(Request $request, Closure $next, $role)
-//     {
-//         if (auth()->user()->role !== $role) {
-//             return response()->json(['message' => 'Forbidden'], 403);
-//         }
-
-//         return $next($request);
-//     }
-// }
+use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next)
     {
-        // Periksa apakah pengguna terautentikasi dan peran sesuai
-        if (!auth()->check() || auth()->user()->role !== $role) {
-            return response()->json(['message' => 'Forbidden'], 403);
+        // mencari tahu request method yang digunakan
+        $method = $request->method();
+        // memeriksa role pengguna
+        $userRole = Auth::user()->role;
+        // tolak jika method GET dan user bukan admin
+        // tolak jika mengubah atau menghapus data yang bukan milik pengguna
+        if($method == 'GET' && $userRole == 'admin' || $method == 'DELETE' && $method == 'PUT'&& $method == 'PATCH' && Auth::user()->id != $request->route()->task->user_id){
+            // periksa ID pengguna
+            // periksa pemilik data pada data yang diminta
         }
-
         return $next($request);
     }
 }
-

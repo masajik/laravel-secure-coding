@@ -8,15 +8,11 @@ class EncryptionController extends Controller
 {
     public function encryptData(Request $request)
     {
-        // Kunci lemah untuk AES-256-CBC
-        $weakKey = '1234567890123456';  // Kunci lemah
-        $iv = '1234567890123456';  // IV yang lemah (16 bytes)
-
         // Data yang akan dienkripsi
-        $data = 'Sensitive Data';
+        $data = $request->encryptData;
 
         // Enkripsi menggunakan AES-256-CBC dengan kunci lemah
-        $cipher = openssl_encrypt($data, 'AES-256-CBC', $weakKey, 0, $iv);
+        $cipher = openssl_encrypt($data, 'AES-256-CBC', env('ENCRYPTION_KEY'), 0, env('ENCRYPTION_IV'));
 
         return response()->json([
             'encrypted_data' => $cipher

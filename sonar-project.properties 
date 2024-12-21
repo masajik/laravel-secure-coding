@@ -1,12 +1,12 @@
 # Project Identification
-sonar.projectKey=final-project-secure-coding-laravel
-sonar.projectName=inal project secure coding laravel
+sonar.projectKey=laravel-crud-api
+sonar.projectName=Laravel CRUD API
 sonar.projectVersion=1.0
 
 # Sources and Tests
 sonar.sources=app, routes
 sonar.tests=tests
-sonar.php.coverage.reportPaths=storage/php-coverage-report.xml
+sonar.php.coverage.reportPaths=storage/coverage-report.xml
 
 # Language Settings
 sonar.language=php
@@ -14,4 +14,4 @@ sonar.sourceEncoding=UTF-8
 
 # Authentication
 sonar.host.url=http://localhost:9000
-sonar.login=sqp_e608de0f557851c54b9a6fa4000b73f7d07d1920
+sonar.login=sqp_865a2ed47d8945a0790afaed9b3ee48945aab79e
